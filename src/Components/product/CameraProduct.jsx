@@ -1,15 +1,27 @@
-import React from 'react'
-const CameraProduct = ({img, name, items}) =>{
+import React from 'react';
 
+const CameraProduct = ({ img, name, items }) => {
   return (
-    <div>
-        <div><img src={img} className='mt-10 px-4 py-3'></img>
-        <h1 className='text-bold text-3xl font-bold flex justify-center'>{name}</h1>
-        <h2 className='text-gray-500 flex justify-center'>{items}</h2>
-        </div>
+    <div className="flex flex-col items-center p-4 bg-white rounded-xl shadow hover:shadow-lg transition duration-300">
+      
+      {/* Product Image */}
+      <img
+        src={img}
+        alt={name}
+        className="w-full max-w-xs sm:max-w-sm md:max-w-md rounded-lg object-cover"
+      />
+
+      {/* Product Name */}
+      <h1 className="mt-4 text-lg sm:text-xl md:text-2xl font-bold text-center">
+        {name}
+      </h1>
+
+      {/* Items Available */}
+      <h2 className="mt-1 text-gray-500 text-sm sm:text-base text-center">
+        {items}
+      </h2>
     </div>
-  )
-}
+  );
+};
 
-
-export default CameraProduct
+export default CameraProduct;

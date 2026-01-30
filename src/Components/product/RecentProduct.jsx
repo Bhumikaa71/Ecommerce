@@ -1,90 +1,81 @@
-import React from 'react'
+import React from 'react';
 
 function RecentProduct() {
+  const products = [
+    {
+      img: 'assets/53.png',
+      label: 'NEW',
+      reviews: 152,
+      name: 'Xomie Remid 8 Sport Water Resistance Watch',
+      price: '$579.00',
+    },
+    {
+      img: 'assets/54.png',
+      label: 'NEW',
+      name: 'Microte Surface 2.0 Laptop',
+      price: '$979.00',
+    },
+    {
+      img: 'assets/55.png',
+      name: 'aPod Pro Tablet 2023 LTE + Wifi, GPS Cellular 12.9 Inch, 512GB',
+      price: '$979.00 - $1,259.00',
+    },
+    {
+      img: 'assets/56.png',
+      label: 'SAVE $192.00',
+      reviews: 152,
+      name: 'SROK Smart Phone 128GB, Oled Retina',
+      price: '$579.00',
+      oldPrice: '$779.00',
+      save: true,
+    },
+  ];
+
   return (
-    <div>
-      <div className='flex justify-between items-center'>
-        {/* //first image box */}
-        <div className='flex p-4'>
-          <div className='relative py-6'>
-            <div className='h-8 w-14 rounded-xl p-1 text-white bg-black absolute left-7'>NEW</div>
-            <div> <img src='assets/53.png' alt='Recently viewed'></img>
-            </div>
-          </div>
-
-          <div>
-            <div className="flex flex-col items-center text-center">
-              <p className="text-sm">(152)</p>
-              <p className="font-bold text-lg py-2">Xomie Remid 8 Sport Water Resistance Watch</p>
-              <p className="font-bold text-xl">$579.00</p>
-            </div>
-          </div>
-          <div className='bg-gray-200 h-10 w-14 rounded-full'></div>
-        </div>
-
-        {/* //second image box */}
-
-        <div className='flex'>
-          <div className='p-4'>
-            <div className='h-8 w-14 rounded-xl p-1 text-white bg-black'>NEW</div>
-            <img src='assets/54.png' alt='Recently viewed'></img>
-          </div>
-          <div className="flex flex-col items-center text-center">
-            <div className="grid grid-rows-2 gap-2">
-              <p className="font-bold text-xl">Microte Surface 2.0 Laptop</p>
-              <p className="font-bold text-xl">$979.00</p>
-            </div>
-          </div>
-
-          <div className='bg-gray-200 h-10 w-14 rounded-full'></div>
-        </div>
-
-        {/* //third images */}
-        <div className='flex p-4'>
-          <div>
-            <img src='assets/55.png' alt='Recently viewed' className='py-16'></img>
-          </div>
-
-          <div className='flex flex-col items-center text-center'>
-            <div className="grid grid-rows-2 gap-1 pt-16">
-              <p className="font-bold text-xl">
-                aPod Pro Tablet 2023<br />
-                LTE + Wifi, GPS Cellular<br />
-                12.9 Inch, 512GB
-              </p>
-              <p className="font-bold text-xl">$979.00 - $1,259.00</p>
-            </div>
-          </div>
-
-          <div className='bg-gray-200 h-10 w-14 rounded-full my-16'></div>
-        </div>
-
-
-        {/* //fourth images */}
-        <div className='flex p-4'>
-          <div>
-            <div className='relative left-6 top-10'>
-              <div className='h-12 w-16 rounded-xl p-1 text-white bg-green-600 text-center text-xs flex items-center justify-center'>
-                SAVE<br />$192.00
+    <div className="p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {products.map((product, index) => (
+          <div
+            key={index}
+            className="flex flex-col items-center bg-white rounded-xl shadow-lg p-4 relative"
+          >
+            {/* Label */}
+            {product.label && (
+              <div
+                className={`absolute top-3 left-3 text-center text-xs font-bold p-1 rounded-lg ${
+                  product.save ? 'bg-green-600 text-white' : 'bg-black text-white'
+                }`}
+              >
+                {product.label}
               </div>
+            )}
+
+            {/* Image */}
+            <img
+              src={product.img}
+              alt={product.name}
+              className="w-40 h-40 md:w-48 md:h-48 object-contain mt-6"
+            />
+
+            {/* Info */}
+            <div className="flex flex-col items-center text-center mt-4 space-y-2 px-2">
+              {product.reviews && <p className="text-sm text-gray-500">({product.reviews})</p>}
+              <p className="font-bold text-lg md:text-xl">{product.name}</p>
+              <div className="flex items-center gap-2 font-bold text-lg md:text-xl">
+                <span>{product.price}</span>
+                {product.oldPrice && (
+                  <span className="line-through text-red-600">{product.oldPrice}</span>
+                )}
               </div>
-
-              <div><img src='assets/56.png' alt='Recently viewed'></img></div>
-          </div>
-
-          <div className='py-8'>
-            <div className='flex flex-col items-center text-center'>
-              <p className='flex justify-center mb-4'>(152)</p>
-              <p className='font-bold text-xl'>SROK Smart Phone<br />128GB, Oled Retina </p>
-              <p className='font-bold text-xl flex gap-1'>$579.00  <span className=' text-red-600 line-through'>$779.00</span></p>
-              {/* <p className='font-bold text-xl text-red-600 line-through py-8'>$779.00</p> */}
             </div>
+
+            {/* Bottom circle  */}
+            <div className="bg-gray-200 h-10 w-14 rounded-full mt-4"></div>
           </div>
-          <div className='bg-gray-200 h-10 w-14 rounded-full'></div>
-        </div>
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default RecentProduct
+export default RecentProduct;

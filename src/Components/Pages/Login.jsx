@@ -1,8 +1,6 @@
-import React, { useState } from 'react';
-import NavBar from '../NavBar'
-import Footer from '../Footer'
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FaEyeSlash } from "react-icons/fa6";
-import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [user, setUser] = useState({
@@ -18,22 +16,20 @@ const Login = () => {
     }));
   };
 
-
   const handleLogin = async (event) => {
     event.preventDefault();
-    const url = 'https://api.freeapi.app/api/v1/users/login';
+    const url = "https://api.freeapi.app/api/v1/users/login";
     try {
       const response = await fetch(url, {
-
-        method: 'POST',
+        method: "POST",
         headers: {
-          'accept': 'application/json',
-          'content-type': 'application/json'
+          accept: "application/json",
+          "content-type": "application/json",
         },
         body: JSON.stringify({
           email: user.emailAddress,
           password: user.password,
-        })
+        }),
       });
 
       const data = await response.json();
@@ -45,72 +41,91 @@ const Login = () => {
     } catch (error) {
       console.error("Error:", error);
     }
-
-  }
+  };
 
   return (
-    <div>
-
-      <div className='g-white border border-gray-100 shadow:md rounded-2xl mx-4'>
-        <p className='p-8 text-gray-500 flex gap-3'>
+    <div className="p-4 md:p-8 space-y-6">
+      {/* Breadcrumb */}
+      <div className="bg-white border border-gray-100 shadow-md rounded-2xl p-4">
+        <p className="text-gray-500 flex flex-wrap gap-1 text-sm md:text-base">
           <span>Home</span>
           <span>/</span>
           <span>Page</span>
           <span>/</span>
-          <span className='font-bold'>Login</span></p>
-
+          <span className="font-bold">Login</span>
+        </p>
       </div>
-      <div className='bg-white my-4 border border-gray-100 shadow:md rounded-2xl'>
-        <div className='grid grid-cols-2'>
 
-          {/* images */}
-          <div className='p-40'>
-            <img src='assets/62.png'></img>
+      {/* Main Content */}
+      <div className="bg-white border border-gray-100 shadow-md rounded-2xl">
+        <div className="flex flex-col lg:flex-row">
+          {/* Left Image */}
+          <div className="w-full lg:w-1/2 flex justify-center items-center p-8 lg:p-16">
+            <img
+              src="assets/62.png"
+              alt="Login"
+              className="max-w-full h-auto"
+            />
           </div>
 
-          <form onSubmit={handleLogin}>
+          {/* Login Form */}
+          <div className="w-full lg:w-1/2 p-6 md:p-12 flex justify-center items-start">
+            <form onSubmit={handleLogin} className="w-full max-w-md space-y-6">
+              <h1 className="text-3xl font-bold text-green-500">
+                WELCOME BACK
+              </h1>
+              <p className="text-gray-500">Login to continue</p>
 
-            <div className='p-20 flex flex-col space-y-6'>
-              <h1 className='text-3xl font-bold text-green-500'>WELCOME BACK</h1>
-              <p className='text-gray-500'>LOGIN TO CONTINUE</p>
-
-              {/* email */}
-              <div className='w-2/3 flex flex-col space-y-2'>
+              {/* Email */}
+              <div className="flex flex-col space-y-2">
                 <label>Email Address</label>
-                <input type='text' placeholder='Example@gmail.com' name='emailAddress' value={user.emailAddress} onChange={handleInputChange} className='w-full border border-gray-600 rounded-xl p-3'></input>
+                <input
+                  type="text"
+                  placeholder="example@gmail.com"
+                  name="emailAddress"
+                  value={user.emailAddress}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-600 rounded-xl p-3"
+                />
               </div>
 
-              {/* password */}
-              <div className='w-2/3 flex flex-col space-y-2'>
+              {/* Password */}
+              <div className="flex flex-col space-y-2 relative">
                 <label>Password</label>
-                <input type='password' name='password' value={user.password} onChange={handleInputChange} className='w-full border border-gray-600 rounded-xl p-3'></input>
-                <p className='text-gray-500 underline'>Forget Password ?</p>
-               {/* <FaEyeSlash className='absolute top-11/12 right-1/5 ' /><br /> */}
+                <input
+                  type="password"
+                  name="password"
+                  value={user.password}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-600 rounded-xl p-3"
+                />
+                <p className="text-gray-500 underline cursor-pointer text-sm">
+                  Forgot Password?
+                </p>
+                {/* <FaEyeSlash className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer" /> */}
               </div>
 
-
-
-
-              <div className='flex flex-col space-y-3'>
-                <button type='submit' className='bg-green-500 w-1/5 p-3 rounded-2xl cursor-pointer'>LOGIN</button>
-                <p className=''>NEW USER ?<span className='text-green-500'>
-                  <Link to="/register">SIGN UP</Link>
-
-
-                </span></p>
+              {/* Submit & Sign Up */}
+              <div className="flex flex-col space-y-2">
+                <button
+                  type="submit"
+                  className="w-full md:w-1/3 p-3 text-white bg-green-500 rounded-2xl cursor-pointer hover:bg-green-600 transition"
+                >
+                  LOGIN
+                </button>
+                <p className="text-center text-gray-600 text-sm md:text-base">
+                  New user?{" "}
+                  <span className="text-green-500">
+                    <Link to="/register">SIGN UP</Link>
+                  </span>
+                </p>
               </div>
-            </div>
-          </form>
+            </form>
+          </div>
         </div>
       </div>
-
-
     </div>
+  );
+};
 
-
-
-
-  )
-}
-
-export default Login
+export default Login;

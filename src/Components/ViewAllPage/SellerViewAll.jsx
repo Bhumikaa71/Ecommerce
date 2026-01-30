@@ -30,7 +30,7 @@ function SellerViewAll() {
     return (
 
         <div>
-            <div className='grid grid-cols-5'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5'>
 
                 {album.map((item, key) => (
                     <BestProductCard

@@ -1,10 +1,6 @@
-import React, { useState } from 'react'
-import NavBar from '../NavBar'
-import Footer from '../Footer'
-import { FaEyeSlash } from "react-icons/fa6";
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-
+import { FaEyeSlash } from "react-icons/fa6";
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -13,7 +9,6 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
-
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -29,7 +24,6 @@ const Register = () => {
     const url = 'https://api.freeapi.app/api/v1/users/register';
     try {
       const response = await fetch(url, {
-
         method: 'POST',
         headers: {
           'accept': 'application/json',
@@ -53,97 +47,110 @@ const Register = () => {
     }
   }
 
-
-
   return (
-    <div>
+    <div className="p-4 md:p-8 space-y-6">
 
-      <div className='bg-white border border-gray-100 shadow:md rounded-2xl px-4 mx-4 my-4'>
-
-        <p className='p-8 text-gray-500 flex gap-3'>
+      {/* Breadcrumb */}
+      <div className="bg-white border border-gray-100 shadow-md rounded-2xl p-4">
+        <p className="text-gray-500 flex flex-wrap gap-1 text-sm md:text-base">
           <span>Home</span>
           <span>/</span>
           <span>Page</span>
           <span>/</span>
-          <span className='font-bold'>Register</span></p>
+          <span className="font-bold">Register</span>
+        </p>
       </div>
 
+      {/* Main Content */}
+      <div className="bg-white border border-gray-100 shadow-md rounded-2xl">
+        <div className="flex flex-col lg:flex-row">
 
-      <div className='bg-white  border border-gray-100 shadow:md my-4 rounded-2xl'>
+          {/* Left Image */}
+          <div className="w-full lg:w-1/2 flex justify-center items-center p-8 lg:p-16">
+            <img src="assets/62.png" alt="Register" className="max-w-full h-auto"/>
+          </div>
 
-        <div className='grid grid-cols-2'>
-            {/* //image */}
+          {/* Registration Form */}
+          <div className="w-full lg:w-1/2 p-6 md:p-12 flex justify-center items-start">
+            <form onSubmit={handleRegister} className="w-full max-w-md space-y-6">
 
-          <div className='p-40'>
-            <img src='assets/62.png'></img>
-            </div>
-          <div>
+              <h1 className="text-3xl font-bold text-green-500">Register</h1>
+              <p className="text-gray-500">Join us</p>
 
-              {/* //form submit */}
-               <form onSubmit={handleRegister}>
-                <div className='p-16 flex flex-col space-y-6'>
+              {/* Name */}
+              <div className="flex flex-col space-y-2">
+                <label>Your Name</label>
+                <input
+                  type="text"
+                  placeholder="John Doe"
+                  name="yourName"
+                  value={user.yourName}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-600 rounded-xl p-3"
+                />
+              </div>
 
-                <h1 className='text-3xl font-bold text-green-500'>Register</h1>
-                <p className='text-gray-500'>JOIN TO US</p>
+              {/* Email */}
+              <div className="flex flex-col space-y-2">
+                <label>Email Address</label>
+                <input
+                  type="email"
+                  placeholder="example@gmail.com"
+                  name="emailAddress"
+                  value={user.emailAddress}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-600 rounded-xl p-3"
+                />
+              </div>
 
+              {/* Password */}
+              <div className="flex flex-col space-y-2 relative">
+                <label>Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={user.password}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-600 rounded-xl p-3"
+                />
+                {/* <FaEyeSlash className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"/> */}
+              </div>
 
-              {/* //name */}
-                <div className='w-2/3 flex flex-col space-y-2'>
-                  <label>Your Name</label>
-                  <input type='text' placeholder='John Doe' name='yourName' value={user.yourName} onChange={handleInputChange} className='w-full  border border-gray-600 rounded-xl p-3'></input>
-                </div>
-                
+              {/* Confirm Password */}
+              <div className="flex flex-col space-y-2 relative">
+                <label>Confirm Password</label>
+                <input
+                  type="password"
+                  name="confirmPassword"
+                  value={user.confirmPassword}
+                  onChange={handleInputChange}
+                  className="w-full border border-gray-600 rounded-xl p-3"
+                />
+                {/* <FaEyeSlash className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"/> */}
+              </div>
 
-
-
-                {/* email */}
-
-                <div className='w-2/3 flex flex-col space-y-2'>
-                  <label>Email Address</label>
-                  <input type='text' placeholder='Example@gmail.com' name='emailAddress' value={user.emailAddress} onChange={handleInputChange} className='w-full border border-gray-600 rounded-xl p-3'></input>
-                </div>
-                
-
-                {/* password */}
-                <div className='w-2/3 flex flex-col space-y-2'>
-                  <label>Password</label>
-                  <input type='password' name='password' value={user.password} onChange={handleInputChange} className='w-full border border-gray-600 rounded-xl p-3'></input>
-
-                  {/* <FaEyeSlash className='absolute top-11/12 right-1/5 ' /><br /> */}
-                </div>
-
-                {/* confirm password */}
-
-                <div className='w-2/3 flex flex-col space-y-2'>
-
-                  <label>Confirm Password</label>
-                  <input type='password' name='confirmPassword' value={user.confirmPassword} onChange={handleInputChange} className='w-full border border-gray-600 rounded-xl p-3'></input>
-                  {/* <FaEyeSlash className='absolute right-1/5 top-11/11 ' /><br /> */}
-
-                </div>
-
-                <div className='flex flex-col space-y-3'>
-                  <button type='submit' className='w-1/5 p-3 text-white bg-green-500 rounded-2xl cursor-pointer'>REGISTER</button>
-                  <p>ALREADY USER ? <span className='text-green-500'>
+              {/* Submit & Login */}
+              <div className="flex flex-col space-y-2">
+                <button
+                  type="submit"
+                  className="w-full p-3 text-white bg-green-500 rounded-2xl cursor-pointer hover:bg-green-600 transition"
+                >
+                  REGISTER
+                </button>
+                <p className="text-center text-gray-600">
+                  Already a user?{" "}
+                  <span className="text-green-500">
                     <Link to="/login">LOG IN</Link>
                   </span>
-                  </p>
-                </div>
-                </div>
-              </form>
-            </div>
-            
+                </p>
+              </div>
+
+            </form>
           </div>
         </div>
-
-
       </div>
-
-
-    // </div>
-
-
-  )
+    </div>
+  );
 }
 
-export default Register
+export default Register;
